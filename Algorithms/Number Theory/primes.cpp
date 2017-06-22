@@ -1,7 +1,5 @@
 #include <bits/stdc++.h>
 #define MAX 10000001
-#define enl "\n"
-#define rep(i,a,n) for(int i = a; i<n; i++)
 
 using namespace std;
 
@@ -65,38 +63,45 @@ bool miller_rabin(long long n, int it = rounds) {
 
 /** Typical sieve of Eratosthenes*/
 
-int primes[MAX];
+bitset<10000010> bs;
+vector<int> primes(MAX);
+long long sieveBound;
 
 void sieve(){
-	rep(i,2,MAX)
-		if(primes[i] == 0)
-			for(int j = 2*i; j<MAX; j+=i)
-				primes[j] = 1;
+  bs.set();
+  bs[0] = bs[1] = 0;
+	for(int i = 2; i<MAX; i++)
+		if(bs[i]){
+			for(int j = i*i; j <= MAX; j+=i) bs[j] = 0;
+			primes.push_back(i);
+    }
+
+  sieveBound = (long long)primes[primes.size() - 1] * (long long)primes[primes.size() - 1];
 }
 
-/** Typical O(sqrt(n)) primality test*/
+/** Optimized primality test */
 
-bool isPrime(int n){
-	for(int i = 2; i*i <= n; i++)
-		if(n%i==0)
-			return false;
-	return true;
+bool isPrime(long long n){
+
+	if(n<MAX) return bs[n]; //O(1) for small numbers
+
+  else if (n>sieveBound) return miller_rabin(n); // O(1) for very large numbers
+
+  else { // O(sqrt(N) / log sqrt(N)) for numbers MAX <= N <= sieveBound
+
+    for (int i = 0; i < (int)primes.size(); i++) 
+      if (n % primes[i] == 0) return false; 
+
+    return true;
+  }
 }
 
 int main()
 {
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL);
-
-	int prime = 943589;
+  // Always fill sieve 
 	sieve();
-
-	if(isPrime(prime))
-		cout << "Is prime: says test!" << enl;
-	if(!primes[prime])
-		cout << "Is prime: says sieve!" << enl;
-	if(miller_rabin(prime))
-		cout << "Is prime: says Miller-Rabin!" << enl;
 
 	return 0;
 }
