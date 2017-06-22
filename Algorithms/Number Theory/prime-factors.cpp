@@ -80,7 +80,7 @@ vector<ll> factorize(ll n)
 	See https://github.com/DPUQ/Ancheta/blob/master/Algorithms/Number%20Theory/primes.cpp 
 */
 
-vector<int> primes(MAX); //Primes. Populated by sieve
+vector<int> primes; //Primes. Populated by sieve
 
 vector<ll> primeFactors(ll n){
 	vector<ll> factors;
