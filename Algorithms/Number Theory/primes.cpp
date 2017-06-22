@@ -64,7 +64,7 @@ bool miller_rabin(long long n, int it = rounds) {
 /** Typical sieve of Eratosthenes*/
 
 bitset<10000010> bs;
-vector<int> primes(MAX);
+vector<int> primes;
 long long sieveBound;
 
 void sieve(){
