@@ -77,7 +77,7 @@ vector<ll> factorize(ll n)
 /** Prime factorization with optimized trial divisions
 	Complexity: O(sqrt(N) / log sqrt(N))
 	NEEDS SIEVE!! Very important. For sieve:
-	See https://github.com/DPUQ/Ancheta/blob/master/Algorithms/Number%20Theory/primes.cpp 
+	Visit https://github.com/DPUQ/Ancheta/blob/master/Algorithms/Number%20Theory/sieves.cpp
 */
 
 vector<int> primes; //Primes. Populated by sieve
