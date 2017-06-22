@@ -61,23 +61,15 @@ bool miller_rabin(long long n, int it = rounds) {
   return true;
 }
 
-/** Typical sieve of Eratosthenes*/
+/** Values filled by sieve of Eratosthenes
+    After calculate sieve:
+    sieveBound = (long long)primes[primes.size() - 1] * (long long)primes[primes.size() - 1];
+    For sieve, visit: https://github.com/DPUQ/Ancheta/blob/master/Algorithms/Number%20Theory/sieves.cpp
+*/
 
 bitset<10000010> bs;
 vector<int> primes;
 long long sieveBound;
-
-void sieve(){
-  bs.set();
-  bs[0] = bs[1] = 0;
-	for(int i = 2; i<MAX; i++)
-		if(bs[i]){
-			for(int j = i*i; j <= MAX; j+=i) bs[j] = 0;
-			primes.push_back(i);
-    }
-
-  sieveBound = (long long)primes[primes.size() - 1] * (long long)primes[primes.size() - 1];
-}
 
 /** Optimized primality test */
 
@@ -94,14 +86,4 @@ bool isPrime(long long n){
 
     return true;
   }
-}
-
-int main()
-{
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-  // Always fill sieve 
-	sieve();
-
-	return 0;
 }
