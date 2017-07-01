@@ -5,10 +5,23 @@ using namespace std;
 typedef long long ll;
 typedef unsigned long long ull;
 
-/** EXTRA: gcd & lcm */
+/** EXTRA: gcd, extendedEuclidean & lcm */
 
 ll gcd(ll a, ll b){	return b == 0? a : gcd(b,a%b); }
 ll lcm(ll a, ll b){ return a * (b / gcd(a,b)); }
+
+void extE(ll a, ll b, ll &x, ll &y, ll &d) { 
+
+	if (b == 0) { 
+		x = 1; y = 0; d = a; return; 
+	}
+
+	extE(b, a % b, x, y, d);
+	ll x1 = y; 
+	ll y1 = x - (a / b) * y; 
+	x = x1; y = y1;
+
+}
 
 /** Pollard rho integer factorization 
 	Very fast, use only for big numbers
