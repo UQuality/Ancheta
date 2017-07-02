@@ -30,7 +30,9 @@ void numPFSieve(){
 void phiSieve(){
 	for(int i = 0; i<MAX; i++) phi[i] = i;
 	for(int i = 2; i<MAX; i++)
-		if(phi[i] == i)
-			for(int j = 2*i; j <= MAX - 1; j+=i) 
-				phi[j] = (phi[j] / i) * (i - 1); 
+		if(phi[i] == i){
+			for(int j = 2*i; j <= MAX - 1; j+=i)
+				phi[j] = (phi[j] / i) * (i - 1);
+            phi[i]--;
+		}
 }
