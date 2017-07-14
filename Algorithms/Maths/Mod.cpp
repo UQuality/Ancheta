@@ -71,3 +71,26 @@ ll mod_inv( ll a ){
 	if(d!=1) return -1;
 	return (x + mod) % mod; 
 }
+
+/**
+* Chinese remainder theorem
+* Finds x such that solves the congruence sytem:
+* x = ai (mod ni)
+*/
+
+ll crt(vector<ll> &a, vector<ll> &n) {
+  ll x = 0;
+  ll N = 1;
+  for (int i = 0; i < n.size(); i++)
+    N *= n[i];
+
+  for (int i = 0; i < a.size(); i++) {
+    ll tmp = (a[i] * (N / n[i])) % N;
+    tmp = (tmp * mod_inv(N / n[i], n[i])) % N; // Observe that 
+                                               // mod_inv have 2 parameters
+                                               // they are mod_inv( ll x, ll mod )
+    x = (x + tmp) % N;
+  }
+
+  return (x + N) % N;
+}
