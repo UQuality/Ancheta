@@ -186,3 +186,14 @@ ll eulerPhi(ll n){
 
 	return ans;
 }
+
+/** EXTRA: Calculates function CSOD = Sigma(sumDivs(1..n)) */
+ll csod(ll n) {
+  ll ans = ll(0) , j;
+  for (ll i = 2LL; i * i <= n; i++) {
+    j = n / i;
+    ans += ((i + j) * (j - i + 1) / 2LL);
+    ans += i * (j - i);
+  }
+  return ans;
+}
