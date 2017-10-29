@@ -1,5 +1,6 @@
-#include <bits/stdc++.h>
-using namespace std;
+/**
+* DP for minimum edit distance between two strings
+*/
 
 void editDistance(string a, string b){
 	int m=a.size(),n=b.size(),cnt=1;
@@ -40,16 +41,4 @@ void editDistance(string a, string b){
         }
    }
 
-}
-
-
-
-int main(){
-	string a,b;
-
-	while(getline(cin,a) && getline(cin,b)){
-        editDistance(a,b);
-	}
-
-	return 0;
 }

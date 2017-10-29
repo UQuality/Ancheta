@@ -2,10 +2,6 @@
 * Union-Find Disjoint set data structure
 */
 
-#include<bits/stdc++.h>
-#define rep(i,n) for(int i = 0; i<n; i++)
-
-using namespace std;
 typedef vector<int> vi;
 
 class DisjointSet
@@ -25,7 +21,7 @@ public :
         ran.assign(n,0);
         sizeSet.assign(n,1);
         parent.resize(n);
-        rep(i,n) parent[i] = i;
+        for(int i = 0; i<n; i++) parent[i] = i;
     }
 
     /** Find set of a given element */

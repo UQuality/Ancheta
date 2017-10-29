@@ -1,7 +1,7 @@
-#include <bits/stdc++.h>
-#define MAX 1000001
 
-using namespace std;
+/**
+	Useful sieves
+*/
 
 bitset<10000010> bs;
 vector<int> primes;

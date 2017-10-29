@@ -1,21 +1,22 @@
-#include <bits/stdc++.h>
-
-using namespace std;
-typedef long long ll;
-
 /**
 * O(log n) algorithm to calculate nth fibonacci number Fn
 */
+
+typedef long long ll;
 
 /**
 * 2x2 square matrix multiplication
 */
 void mult(ll m1[2][2], ll m2[2][2] , ll m)
 {
-  ll x =  ((m1[0][0] % m * m2[0][0] % m ) % m + (m1[0][1] % m * m2[1][0] % m) % m) % m;
-  ll y =  ((m1[0][0] % m * m2[0][1] % m ) % m + (m1[0][1] % m * m2[1][1] % m) % m) % m;
-  ll z =  ((m1[1][0] % m * m2[0][0] % m ) % m + (m1[1][1] % m * m2[1][0] % m) % m) % m;
-  ll w =  ((m1[1][0] % m * m2[0][1] % m ) % m + (m1[1][1] % m * m2[1][1] % m) % m) % m;
+  ll x =  ((m1[0][0] % m * m2[0][0] % m ) % m + 
+          (m1[0][1] % m * m2[1][0] % m) % m) % m;
+  ll y =  ((m1[0][0] % m * m2[0][1] % m ) % m + 
+          (m1[0][1] % m * m2[1][1] % m) % m) % m;
+  ll z =  ((m1[1][0] % m * m2[0][0] % m ) % m + 
+          (m1[1][1] % m * m2[1][0] % m) % m) % m;
+  ll w =  ((m1[1][0] % m * m2[0][1] % m ) % m + 
+          (m1[1][1] % m * m2[1][1] % m) % m) % m;
 
   m1[0][0] = x;
   m1[0][1] = y;

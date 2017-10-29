@@ -1,10 +1,7 @@
-#include<bits/stdc++.h>
-using namespace std;
+/**
+	Suffix array build 
+*/
 
-
-// --------------------------------------- ACA EMPIEZA EL SUFFIX ARRAY ---------------------------------
-
-#define MAX_N 100010
 char T[MAX_N];
 int n;
 int RA[MAX_N], tempRA[MAX_N];
@@ -12,7 +9,9 @@ int SA[MAX_N], tempSA[MAX_N];
 int c[MAX_N];
 
 
-//Metodo de ordenamiento Solo sirve para enteros y se ejecuta en O(n + k) -> O(n)
+/**
+	O(n + k) counting sort for integer-only
+*/
 void countingSort(int k){
 	int i, sum, maxi = max(300, n);
 	memset(c, 0, sizeof c);
@@ -29,7 +28,9 @@ void countingSort(int k){
 		SA[i] = tempSA[i];
 }
 
-//Construye el SUffix Array Usando el couting sort en O(nlogn)
+/**
+	O(nlogn) method for build suffix array
+*/
 void constructSA(){
 	int i, k, r;
 	for(i = 0; i < n; i++){
@@ -42,25 +43,12 @@ void constructSA(){
 		countingSort(0);
 		tempRA[SA[0]] = r = 0;
 		for(i = 1; i < n; i++){
-			tempRA[SA[i]] = (RA[SA[i]] == RA[SA[i - 1]] && RA[SA[i] + k] == RA[SA[i - 1] + k]) ? r : ++r;
+			tempRA[SA[i]] = (RA[SA[i]] == RA[SA[i - 1]] 
+				&& RA[SA[i] + k] == RA[SA[i - 1] + k]) ? r : ++r;
 		}
 		for(int i = 0; i < n; i++)
 			SA[i] = tempSA[i];
 		if(RA[SA[n - 1]] == n - 1) break;
 	}
 
-}
-
-// -------------------------------------------- ACA FINALIZA EL SUFFIX ARRAY
-
-int main(){
-
-	cin >> T;
-	n = strlen(T);
-	T[n++] = '$';
-	constructSA();
-
-	for(int i = 0; i < n; i++)
-		cout << SA[i] << " " << T + SA[i] << endl;
-	return 0;
 }

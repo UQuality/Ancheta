@@ -1,9 +1,10 @@
-#include <bits/stdc++.h>
-using namespace std;
+/**
+	Trie data structure
+*/
+
 #define MAXCHAR 26
 #define CHAR_TO_INDEX(c) ((int)c - (int)'a')
 
-bool entra;
 struct node
 {
 	int prefix_count;
@@ -11,12 +12,19 @@ struct node
 	struct node *child[MAXCHAR];
 }*head;
 
+/**
+	Build Trie 
+*/
 void init()
 {
 	head = new node();
 	head->isEnd = false;
 	head->prefix_count = 0;
 }
+
+/**
+	insert word in trie
+*/
 
 void insert(string word)
 {
@@ -34,6 +42,10 @@ void insert(string word)
 	current->isEnd = true;	
 }
 
+/**
+	Search word in trie
+*/
+
 bool search(string word)
 {
 	node *current = head;
@@ -45,38 +57,4 @@ bool search(string word)
 		current = current->child[letter];
 	}
 	return current->isEnd;
-}
-
-int words_with_prefix(string prefix)
-{
-	node *current = head;
-	for(int i = 0; i < prefix.length() ; ++i)
-	{
-		int letter = (int)prefix[i] - (int)'a';
-		if(current->child[letter] == NULL)
-			return 0;
-		else
-			current = current->child[letter];
-	}
-	return current->prefix_count;
-}
-
-int main(){
-  static char s[101];
-  int nCasos;
-  scanf("%d",&nCasos);
-  while(nCasos!=0){
-  	int n=nCasos;
-     init();
-  	for(int i=0; i < n; i++){
-       scanf("%s",s);
-       insert(s);
-  	}
-  	scanf("%s",s);
-    puts(search(s) ? "existe":"No existe");
-    printf("no of words with prefix abhi are %d\n",words_with_prefix(s));
-     scanf("%d",&nCasos);
-  }
-
-	return 0;
 }
