@@ -1,6 +1,11 @@
 /** Extended euclidean algorithm for 
 	Bezout application to solve linear 
-	diophantine equations  
+	diophantine equations  ax + by = c
+
+	Solutions have form:
+
+	X = (c/d)*x  +  (b/d)*n 
+	Y = (c/d)*y  -  (a/d)*n 
 */
 
 typedef long long ll;
