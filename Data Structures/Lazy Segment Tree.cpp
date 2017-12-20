@@ -13,7 +13,7 @@ void build(int n, int l, int r){
 		int m = (l + r) >> 1;
 		build(lf(n), l, m);
 		build(lf(n) + 1, m + 1, r);
-		t[n] = min(t[lf(n)],t[lf(n) + 1]);
+		t[n] = t[lf(n)] + t[lf(n) + 1];
 	}
 }
 
