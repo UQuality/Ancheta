@@ -30,15 +30,13 @@ int query(int n, int l, int r, int i, int j){
 void update(int n, int l, int r, int i, int j, int v){
 	propagate(n,l,r);
 	if(i > r || j < l) return;
-	if(l == r){
-		t[n] += v;
-		s[n] = 0; 
-		return;
-	}
 	if(i <= l && j >= r){
 		t[n] += (r - l + 1) * v;
-		s[lf(n)] += v;
-		s[lf(n) + 1] += v;
+		if(l != r){
+			s[lf(n)] += v;
+			s[lf(n) + 1] += v;
+		}
+		else s[n] = 0;
 		return;
  	}
 	int m = (l + r) >> 1;
