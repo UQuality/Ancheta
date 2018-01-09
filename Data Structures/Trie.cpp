@@ -1,60 +1,50 @@
 /**
 	Trie data structure
 */
-
+#include <bits/stdc++.h>
+using namespace std;
 #define MAXCHAR 26
-#define CHAR_TO_INDEX(c) ((int)c - (int)'a')
+#define CHAR_TO_INDEX(c) ((int) c - (int)'a')
 
-struct node
-{
-	int prefix_count;
-	bool isEnd;
-	struct node *child[MAXCHAR];
-}*head;
+struct Trie{
+    struct node{
+    	int prefix;
+    	bool fin;
+    	struct node *child[MAXCHAR];
+    }*head;
+    
+    
+    void init(){
+    	head=new node();
+    	head->prefix=0;
+    	head->fin=false;
+    }
 
-/**
-	Build Trie 
-*/
-void init()
-{
-	head = new node();
-	head->isEnd = false;
-	head->prefix_count = 0;
-}
+    void insert(string a){
+    	node *curr=head;
+    	curr->prefix++;
+        int i,letra;
+    	for(i=0; i < a.size(); i++){
+    		letra=CHAR_TO_INDEX(a[i]);
+    		if(curr->child[letra]==NULL){
+    			curr->child[letra]=new node();
+    		}
+    		curr->child[letra]->prefix++;
+    		curr=curr->child[letra];
+    	}
+    	curr->fin=true;
+    }
 
-/**
-	insert word in trie
-*/
-
-void insert(string word)
-{
-	node *current = head;
-	current->prefix_count++;
-	
-	for(int i = 0 ; i < word.length(); ++i)
-	{
-		int letter = CHAR_TO_INDEX(word[i]);
-		if(current->child[letter] == NULL)
-			current->child[letter] = new node();
-		current->child[letter]->prefix_count++;
-		current = current->child[letter];       
-	}
-	current->isEnd = true;	
-}
-
-/**
-	Search word in trie
-*/
-
-bool search(string word)
-{
-	node *current = head;
-	for(int i = 0 ; i < word.length(); ++i)
-	{
-		int letter = CHAR_TO_INDEX(word[i]);
-		if(current->child[letter] == NULL)
-			return false;		//no esta 
-		current = current->child[letter];
-	}
-	return current->isEnd;
-}
+    int search(string a){
+    	node *curr=head;
+    	int i,letra;
+    	for(i=0; i < a.size(); i++){
+    		letra=CHAR_TO_INDEX(a[i]);
+    		if(curr->child[letra]==NULL){
+    			return -1;
+    		}
+    		curr=curr->child[letra];
+    	}
+     return curr->prefix;
+    }
+};
